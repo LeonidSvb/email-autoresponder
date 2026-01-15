@@ -43,16 +43,22 @@ st.markdown("""
     .category-objection { background-color: #ffe0b2; color: #ef6c00; }
     .category-no { background-color: #ffcdd2; color: #c62828; }
     .cta-box {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background-color: #f8f9fa;
+        border: 1px solid #e0e0e0;
         border-radius: 10px;
         padding: 1.5rem;
         margin: 1.5rem 0;
-        color: white;
         text-align: center;
     }
+    .cta-box h3 {
+        color: #1a1a1a;
+        margin-top: 0;
+    }
+    .cta-box p {
+        color: #4a4a4a;
+    }
     .cta-box a {
-        color: white;
-        text-decoration: underline;
+        color: #667eea;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -174,9 +180,9 @@ if "selected_reply" not in st.session_state:
 
 # Example reply buttons
 example_replies = {
-    "Interested": "Sounds interesting. Happy to learn more.",
-    "Curious": "How does this work exactly?",
-    "Clarification": "What company are you with?",
+    "Let's talk": "Sure, let's chat. Send me your calendar.",
+    "Curious": "Interesting. How does this work?",
+    "Who is this?": "What company are you with?",
     "Not now": "Not a priority right now, maybe later.",
     "Hard no": "Not interested, please remove me.",
 }
@@ -249,7 +255,7 @@ if "last_result" in st.session_state:
 st.markdown("---")
 st.markdown("""
 <div class='cta-box'>
-    <h3 style='margin-top: 0; color: white;'>Want to build your own sales machine?</h3>
+    <h3>Want to build your own sales machine?</h3>
     <p>If you want to create an automated system that generates meetings with your clients, improve your existing outreach, or just connect - reach out to Leo.</p>
     <p style='margin-bottom: 0;'>
         <strong>WhatsApp:</strong> +628175755953<br>
