@@ -1,9 +1,5 @@
 import streamlit as st
-import os
-from dotenv import load_dotenv
 from autoresponder import Autoresponder
-
-load_dotenv()
 
 # Page config
 st.set_page_config(
@@ -46,8 +42,17 @@ st.markdown("""
     .category-neutral { background-color: #fff9c4; color: #f9a825; }
     .category-objection { background-color: #ffe0b2; color: #ef6c00; }
     .category-no { background-color: #ffcdd2; color: #c62828; }
-    .example-btn {
-        margin: 0.25rem;
+    .cta-box {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 10px;
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+        color: white;
+        text-align: center;
+    }
+    .cta-box a {
+        color: white;
+        text-decoration: underline;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -66,14 +71,14 @@ It automatically:
 ---
 """)
 
-# Sidebar for API key
+# Sidebar
 with st.sidebar:
     st.header("Settings")
     api_key = st.text_input(
         "OpenAI API Key",
         type="password",
-        value=os.getenv("OPENAI_API_KEY", ""),
-        help="Enter your OpenAI API key"
+        value="",
+        help="Enter your OpenAI API key to test"
     )
 
     calendar_link = st.text_input(
@@ -83,6 +88,8 @@ with st.sidebar:
     )
 
     st.markdown("---")
+
+    # How it works - simple
     st.markdown("**How it works:**")
     st.markdown("""
     1. You send cold outreach
@@ -90,6 +97,46 @@ with st.sidebar:
     3. AI classifies intent
     4. AI generates response
     """)
+
+    st.markdown("---")
+
+    # Expander with detailed info
+    with st.expander("Why speed matters"):
+        st.markdown("""
+        Research shows that responding within **5 minutes** increases positive reply rates by **15-30%** compared to delayed responses.
+
+        Leads go cold fast. This system ensures instant engagement while you focus on closing deals.
+        """)
+
+    with st.expander("Integration"):
+        st.markdown("""
+        Connects directly with your sending tools:
+        - Instantly
+        - SmartLead
+        - PlusVibe
+        - Lemlist
+        - Any tool with webhook/API
+
+        Also integrates with CRMs (HubSpot, Pipedrive, Close) via webhooks or Zapier/Make.
+        """)
+
+    with st.expander("Customization"):
+        st.markdown("""
+        Prompts are tailored to your specific service:
+        - Your positioning (connector, agency, SaaS)
+        - Response style and length
+        - Calendar booking flow
+        - Objection handling approach
+        """)
+
+    with st.expander("How it's built"):
+        st.markdown("""
+        The system uses **few-shot prompting** - each response category has curated examples of ideal replies that guide the AI.
+
+        Combined with strict formatting rules (max word counts, no salesy language, no greetings), responses stay natural and on-brand.
+
+        No robotic AI tone. Sounds like a real person wrote it.
+        """)
 
 # Example outreach message with variables
 st.subheader("Example Outreach Message")
@@ -198,10 +245,22 @@ if "last_result" in st.session_state:
     st.markdown("**Generated Response:**")
     st.markdown(f"<div class='response-box'>{result['response']}</div>", unsafe_allow_html=True)
 
-# Footer
+# CTA Section
 st.markdown("---")
 st.markdown("""
-<div style='text-align: center; color: #888; font-size: 0.85rem;'>
+<div class='cta-box'>
+    <h3 style='margin-top: 0; color: white;'>Want to build your own sales machine?</h3>
+    <p>If you want to create an automated system that generates meetings with your clients, improve your existing outreach, or just connect - reach out to Leo.</p>
+    <p style='margin-bottom: 0;'>
+        <strong>WhatsApp:</strong> +628175755953<br>
+        <strong>Email:</strong> <a href="mailto:leo@systemhustle.com">leo@systemhustle.com</a>
+    </p>
+</div>
+""", unsafe_allow_html=True)
+
+# Footer
+st.markdown("""
+<div style='text-align: center; color: #888; font-size: 0.85rem; margin-top: 1rem;'>
     Built for B2B outreach automation
 </div>
 """, unsafe_allow_html=True)
