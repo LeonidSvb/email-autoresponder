@@ -168,6 +168,10 @@ st.subheader("Test the Autoresponder")
 
 st.markdown("**Click an example or type your own reply:**")
 
+# Initialize session state
+if "selected_reply" not in st.session_state:
+    st.session_state.selected_reply = ""
+
 # Example reply buttons
 example_replies = {
     "Interested": "Sounds interesting. Happy to learn more.",
@@ -181,20 +185,16 @@ example_replies = {
 cols = st.columns(len(example_replies))
 for i, (label, reply) in enumerate(example_replies.items()):
     if cols[i].button(label, key=f"btn_{label}", use_container_width=True):
-        st.session_state.user_reply = reply
+        st.session_state.selected_reply = reply
+        st.rerun()
 
 # Text input for custom reply
 user_reply = st.text_area(
     "Prospect's Reply",
-    value=st.session_state.get("user_reply", ""),
+    value=st.session_state.selected_reply,
     height=100,
-    placeholder="Type a reply here or click an example above...",
-    key="reply_input"
+    placeholder="Type a reply here or click an example above..."
 )
-
-# Update session state
-if user_reply:
-    st.session_state.user_reply = user_reply
 
 # Process button
 if st.button("Generate Response", type="primary", use_container_width=True):
